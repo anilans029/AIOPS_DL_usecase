@@ -13,7 +13,6 @@ boto3==1.24.33
 botocore==1.27.33
 cached-property==1.5.2
 cachetools==5.2.0
-certifi @ file:///C:/Windows/TEMP/abs_e9b7158a-aa56-4a5b-87b6-c00d295b01fanefpc8_o/croots/recipe/certifi_1655968940823/work/certifi
 cffi==1.15.1
 charset-normalizer==2.1.0
 colorama==0.4.5
@@ -129,3 +128,6 @@ xmltodict==0.13.0
 yarl==1.7.2
 zc.lockfile==2.0
 zipp==3.8.1
+
+
+-e .
