@@ -1,5 +1,6 @@
 from venv import create
 from src.utils.all_utils import read_yaml, create_directory
+from src.utils.callbacks_utils import create_and_save_tf_callback, create_and_save_checkpoint_callback
 import pandas as pd
 import argparse
 import os
@@ -21,8 +22,18 @@ def prepare_callbacks(config_path, params_path):
 
     artifacts = config["artifacts"]
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
+    callbacks_dir = artifacts["CALLBACKS_DIR"]
  
-  
+    tensorboard_log_dir_path = os.path.join(artifacts_dir,artifacts["TENSORBOARD_ROOT_LOG_DIR"])
+    CHECKPOINT_DIR_path = os.path.join(artifacts_dir,artifacts["CHECKPOINT_DIR"])
+    CALLBACKS_DIR_path = os.path.join(artifacts_dir,artifacts["CALLBACKS_DIR"])
+
+    create_directory([tensorboard_log_dir_path,CHECKPOINT_DIR_path,CALLBACKS_DIR_path])
+
+    create_and_save_tf_callback(CALLBACKS_DIR_path, tensorboard_log_dir_path)
+
+    create_and_save_checkpoint_callback(CALLBACKS_DIR_path,CHECKPOINT_DIR_path)
+
 
   
 
