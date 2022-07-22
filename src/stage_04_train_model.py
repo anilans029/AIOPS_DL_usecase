@@ -1,7 +1,8 @@
+from re import M
 from venv import create
 from src.utils.all_utils import read_yaml, create_directory
 from src.utils.callbacks_utils import get_callbacks
-from src.utils.model_utils import load_full_model
+from src.utils.model_utils import load_full_model, get_unique_path_to_save_model
 from src.utils.data_management_utils import train_and_valid_generator
 import argparse
 import os
@@ -21,7 +22,6 @@ def train_model(config_path, params_path):
     artifacts = config["artifacts"]
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
     callbacks_dir = artifacts["CALLBACKS_DIR"]
-    trained_model_dir =artifacts["TRAINED_MODEL_DIR"]
     
     untrained_full_model_path = os.path.join(artifacts_dir,artifacts["BASE_MODEL_DIR"],
                                 artifacts["UPDATED_BASE_MODEL_NAME"])
@@ -37,9 +37,24 @@ def train_model(config_path, params_path):
                                                                     do_data_augmentation= params["AUGMENTATION"],
                                                                     batchSize = params["BATCH_SIZE"])
 
-    
+    step_per_epoch = train_generator.samples // train_generator.batch_size
+    validation_steps = valid_generator.samples // valid_generator.batch_size
 
-  
+    model.fit(train_generator,
+                validation_data = valid_generator,
+                epochs = params["EPOCHS"],
+                steps_per_epoch = step_per_epoch,
+                validation_steps = validation_steps,
+                callbacks = callbacks )
+
+    trained_model_dir = os.path.join(artifacts_dir,artifacts["TRAINED_MODEL_DIR"])
+    create_directory([trained_model_dir])
+
+
+    trained_model_path = get_unique_path_to_save_model(trained_model_dir)
+    model.save(trained_model_path)
+
+    lg.info(f"trained model saved at path {trained_model_path}")
 
 if __name__ == "__main__":
 
