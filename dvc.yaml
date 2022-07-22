@@ -24,4 +24,18 @@ stages:
       - aritfacts/base_model/VGG16_base_model.h5
       - aritfacts/base_model/updated_VGG16_base_model.h5
 
+  prepare_calbacks:
+    cmd: python src/stage_03_prepare_callbacks.py
+    deps:
+      - src/stage_03_prepare_callbacks.py
+      - src/utils/all_utils.py
+      - src/utils/model_utils.py
+      - src/utils/callbacks_utils.py
+      - config/config.yaml
+      - params.yaml
+      
+    outs:
+      - aritfacts/callbacks/checkpoint_cb.cb
+      - aritfacts/callbacks/tensorboard_cb.cb
+
     

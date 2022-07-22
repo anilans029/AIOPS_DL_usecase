@@ -51,3 +51,31 @@ stages:
     - path: aritfacts/base_model/updated_VGG16_base_model.h5
       md5: b8e816196925c0e16a42fe50345d50af
       size: 59132960
+  prepare_calbacks:
+    cmd: python src/stage_03_prepare_callbacks.py
+    deps:
+    - path: config/config.yaml
+      md5: 0f58ce8eb2d70033fcb5317c39056c33
+      size: 467
+    - path: params.yaml
+      md5: a0d0f7398181fbea048391bfb449378e
+      size: 123
+    - path: src/stage_03_prepare_callbacks.py
+      md5: 31c3564497c8f62cb68ff63cc25ea23b
+      size: 1958
+    - path: src/utils/all_utils.py
+      md5: 6dbd0b6b3aaf205372f0cfd6afc97fe6
+      size: 1005
+    - path: src/utils/callbacks_utils.py
+      md5: e07dde1581689aad175b39e4cb38b013
+      size: 1544
+    - path: src/utils/model_utils.py
+      md5: 941dc63f4e1c4934e000fef829d4eb91
+      size: 2010
+    outs:
+    - path: aritfacts/callbacks/checkpoint_cb.cb
+      md5: cefb5f5714430d2123960fa27ea86268
+      size: 838
+    - path: aritfacts/callbacks/tensorboard_cb.cb
+      md5: c52b7c18b130a41f7b3e6d13c9569a8b
+      size: 664
