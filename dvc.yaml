@@ -37,5 +37,26 @@ stages:
     outs:
       - aritfacts/callbacks/checkpoint_cb.cb
       - aritfacts/callbacks/tensorboard_cb.cb
+  train_model:
+      cmd: python src/stage_04_train_model.py
+      deps:
+        - src/stage_04_train_model.py
+        - src/utils/all_utils.py
+        - src/utils/model_utils.py
+        - src/utils/callbacks_utils.py
+        - src/utils/data_management_utils.py
+        - config/config.yaml
+        - params.yaml
+        - aritfacts/callbacks/checkpoint_cb.cb
+        - aritfacts/callbacks/tensorboard_cb.cb
+        - aritfacts/base_model/updated_VGG16_base_model.h5
+        - data
 
-    
+      params:
+        - IMAGE_SIZE
+        - BATCH_SIZE
+        - EPOCHS
+        - AUGMENTATION
+      
+      outs:
+        - aritfacts/model

@@ -79,3 +79,54 @@ stages:
     - path: aritfacts/callbacks/tensorboard_cb.cb
       md5: c52b7c18b130a41f7b3e6d13c9569a8b
       size: 664
+  train_model:
+    cmd: python src/stage_04_train_model.py
+    deps:
+    - path: aritfacts/base_model/updated_VGG16_base_model.h5
+      md5: b8e816196925c0e16a42fe50345d50af
+      size: 59132960
+    - path: aritfacts/callbacks/checkpoint_cb.cb
+      md5: cefb5f5714430d2123960fa27ea86268
+      size: 838
+    - path: aritfacts/callbacks/tensorboard_cb.cb
+      md5: c52b7c18b130a41f7b3e6d13c9569a8b
+      size: 664
+    - path: config/config.yaml
+      md5: 0f58ce8eb2d70033fcb5317c39056c33
+      size: 467
+    - path: data
+      md5: a52ad4b30715598bfd754e3e9c51ef2c.dir
+      size: 37934943
+      nfiles: 277
+    - path: params.yaml
+      md5: a0d0f7398181fbea048391bfb449378e
+      size: 123
+    - path: src/stage_04_train_model.py
+      md5: 7a6b8142f318a105d5c9ab46e2acbf91
+      size: 2994
+    - path: src/utils/all_utils.py
+      md5: 6dbd0b6b3aaf205372f0cfd6afc97fe6
+      size: 1005
+    - path: src/utils/callbacks_utils.py
+      md5: e07dde1581689aad175b39e4cb38b013
+      size: 1544
+    - path: src/utils/data_management_utils.py
+      md5: a06667c5496cf7d1a24ee820abeaf2de
+      size: 1564
+    - path: src/utils/model_utils.py
+      md5: 941dc63f4e1c4934e000fef829d4eb91
+      size: 2010
+    params:
+      params.yaml:
+        AUGMENTATION: true
+        BATCH_SIZE: 16
+        EPOCHS: 2
+        IMAGE_SIZE:
+        - 224
+        - 224
+        - 3
+    outs:
+    - path: aritfacts/model
+      md5: 881490813e707b8d22ae149cb011f59c.dir
+      size: 59135136
+      nfiles: 1
