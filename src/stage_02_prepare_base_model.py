@@ -70,9 +70,9 @@ if __name__ == "__main__":
     args.add_argument("--params", "-p", default="params.yaml")
     parse_args = args.parse_args()
     try:
-        lg.info("stage 1 --->  (loading data from source to local) started")
+        lg.info("stage 2 --->  (preparing base model) started")
         prepare_base_model(parse_args.config,parse_args.params)
-        lg.info("stage 1 --->  (loading data from source to local) completed")
+        lg.info("stage 2 --->  (preparing base model) completed")
     except Exception as e:
         lg.exception(e)
         raise e
