@@ -2,7 +2,7 @@ from venv import create
 from src.utils.all_utils import read_yaml, create_directory
 from src.utils.callbacks_utils import get_callbacks
 from src.utils.model_utils import load_full_model
-import pandas as pd
+from src.utils.data_management_utils import train_and_valid_generator
 import argparse
 import os
 import logging as lg
@@ -32,6 +32,10 @@ def train_model(config_path, params_path):
     
     callbacks = get_callbacks(callback_dir_path)
 
+    train_generator , valid_generator = train_and_valid_generator(data_dir= artifacts["DATA_DIR"],
+                                                                    image_size = params["IMAGE_SIZE"][:-1],
+                                                                    do_data_augmentation= params["AUGMENTATION"],
+                                                                    batchSize = params["BATCH_SIZE"])
 
     
 
