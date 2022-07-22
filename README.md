@@ -1,3 +1,6 @@
+## wokflow -
+<img src="others/images/workflow.png" alt="workflow" width="70%">
+
 # DVC - DL - TF - AIOPS demo
 
 download data --> [source](https://drive.google.com/drive/u/5/folders/1tz4IOoJKdi999IRdqJY04VOifyllRzj1
