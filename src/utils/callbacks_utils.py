@@ -13,7 +13,7 @@ def create_and_save_tf_callback(CALLBACKS_DIR_path, tensorboard_log_dir_path):
     tensorboard_callback = keras.callbacks.TensorBoard(log_dir= tb_running_log_dir)
 
     tb_callback_filepath = os.path.join(CALLBACKS_DIR_path,"tensorboard_cb.cb")
-    joblib.dump(tensorboard_callback)
+    joblib.dump(tensorboard_callback, tb_callback_filepath)
 
     lg.info(f"tb_callback is being saved at {tb_callback_filepath}")
 
