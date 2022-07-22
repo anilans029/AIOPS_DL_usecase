@@ -1,11 +1,13 @@
 from venv import create
 from src.utils.all_utils import read_yaml, create_directory
+from src.utils.model_utils import get_VGG16_model,prepare_full_model
 import pandas as pd
 import argparse
 import os
 import shutil
 from tqdm import tqdm
 import logging as lg
+import io
 
 
 
@@ -30,9 +32,28 @@ def prepare_base_model(config_path, params_path):
 
     base_model_path = os.path.join(base_model_dir_path, base_model_name) 
 
-    model = get_VGG16(input_shape =params["INPUT_SHAPE"], batch_size = params["BATCH_SIZE"], epochs = params["EPOCHS"])
+    base_model = get_VGG16_model(inputShape =params["IMAGE_SIZE"], model_path=base_model_path)
 
-   
+    full_model = prepare_full_model(
+        base_model,
+        CLASSES = params["CLASSES"],
+        freeze_all = True,
+        freeze_till = None,
+        learning_rate = params["LEARNING_RATE"]
+    )
+
+    updated_base_model_name = artifacts["UPDATED_BASE_MODEL_NAME"]
+    updated_base_model_path = os.path.join(base_model_dir_path, updated_base_model_name)
+    full_model.save(updated_base_model_path)
+
+    def _log_model_summary(model):
+        with io.StringIO() as stream:
+            model.summary(print_fn = lambda x : stream.write(f"{x}\n"))
+            summary_str = stream.getvalue()
+            return summary_str
+        
+    lg.info(f"full model summary: \n {_log_model_summary(full_model)}")
+  
 
   
 
