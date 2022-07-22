@@ -8,3 +8,20 @@ stages:
     outs:
       - data/cat
       - data/dog
+
+  prepare_base_model:
+    cmd: python src/stage_02_prepare_base_model.py
+    deps:
+      - src/stage_02_prepare_base_model.py
+      - src/utils/all_utils.py
+      - src/utils/model_utils.py
+      - config/config.yaml
+    params:
+      - IMAGE_SIZE
+      - LEARNING_RATE
+      - CLASSES
+    outs:
+      - aritfacts/base_model/VGG16_base_model.h5
+      - aritfacts/base_model/updated_VGG16_base_model.h5
+
+    
