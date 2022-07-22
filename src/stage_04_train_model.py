@@ -1,12 +1,11 @@
 from venv import create
 from src.utils.all_utils import read_yaml, create_directory
+from src.utils.callbacks_utils import get_callbacks
+from src.utils.model_utils import load_full_model
 import pandas as pd
 import argparse
 import os
-import shutil
-from tqdm import tqdm
 import logging as lg
-import io
 
 
 
@@ -22,7 +21,18 @@ def train_model(config_path, params_path):
     artifacts = config["artifacts"]
     artifacts_dir = artifacts["ARTIFACTS_DIR"]
     callbacks_dir = artifacts["CALLBACKS_DIR"]
- 
+    trained_model_dir =artifacts["TRAINED_MODEL_DIR"]
+    
+    untrained_full_model_path = os.path.join(artifacts_dir,artifacts["BASE_MODEL_DIR"],
+                                artifacts["UPDATED_BASE_MODEL_NAME"])
+    
+    callback_dir_path = os.path.join(artifacts_dir, callbacks_dir)
+
+    model = load_full_model(untrained_full_model_path)
+    
+    callbacks = get_callbacks(callback_dir_path)
+
+
     
 
   

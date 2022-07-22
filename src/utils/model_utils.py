@@ -39,4 +39,7 @@ def prepare_full_model( model,CLASSES ,freeze_all , freeze_till ,learning_rate):
     lg.info("custom model is compiled and ready to be trained")
     return full_model
 
-
+def load_full_model(untrained_full_model_path):
+    model = keras.models.load_model(untrained_full_model_path)
+    lg.info(f"untrained model is loaded from{untrained_full_model_path}")
+    return model
