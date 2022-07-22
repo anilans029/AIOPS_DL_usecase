@@ -137,3 +137,5 @@ dmypy.json
 
 config/secrets.yaml
 /data
+
+/aritfacts/base_model
