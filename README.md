@@ -1,3 +1,4 @@
+## Basic steps for initializing the project setup
 ## wokflow -
 <img src="others/images/workflow.png" alt="workflow" width="70%">
 
